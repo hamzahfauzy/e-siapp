@@ -32,6 +32,10 @@
                                     <input type="password" name="users[password]" class="form-control" required>
                                 </div>
                                 <div class="form-group">
+                                    <label for="">OPD</label>
+                                    <?= Form::input('options-obj:opd,id,nm_opd', "users[opd_id]", ['class'=>"form-control","placeholder"=>'Pilih OPD']) ?>
+                                </div>
+                                <div class="form-group">
                                     <button class="btn btn-primary">Submit</button>
                                 </div>
                             </form>

@@ -8,7 +8,7 @@
                         <h5 class="text-white op-7 mb-2">Memanajemen data pengguna</h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
-                        <a href="<?=route('users/index')?>" class="btn btn-warning btn-round">Kembali</a>
+                        <a href="<?=routeTo('users/index')?>" class="btn btn-warning btn-round">Kembali</a>
                     </div>
                 </div>
             </div>
@@ -30,6 +30,10 @@
                                 <div class="form-group">
                                     <label for="">Kata Sandi</label>
                                     <input type="password" name="users[password]" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label for="">OPD</label>
+                                    <?= Form::input('options-obj:opd,id,nm_opd', "users[opd_id]", ['class'=>"form-control","placeholder"=>'Pilih OPD','value'=>$data->opd_id]) ?>
                                 </div>
                                 <div class="form-group">
                                     <button class="btn btn-primary">Submit</button>

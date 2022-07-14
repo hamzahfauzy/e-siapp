@@ -2,7 +2,8 @@ CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     username VARCHAR(100) NOT NULL,
-    password VARCHAR(100) NOT NULL
+    password VARCHAR(100) NOT NULL,
+    opd_id INT DEFAULT NULL
 );
 
 CREATE TABLE roles (
@@ -57,31 +58,42 @@ CREATE TABLE kegiatan (
     kd_prioritas VARCHAR(100) NOT NULL,
     program_prioritas VARCHAR(100) NOT NULL,
     total_target VARCHAR(100) NOT NULL,
-    satuan VARCHAR(100) NOT NULL,
     kegiatan_2021 VARCHAR(100) NOT NULL,
-    kegiatan_2022 VARCHAR(100) NOT NULL,
-    kegiatan_2023 VARCHAR(100) NOT NULL,
-    kegiatan_2024 VARCHAR(100) NOT NULL,
-    kegiatan_2025 VARCHAR(100) NOT NULL,
-    kegiatan_2026 VARCHAR(100) NOT NULL,
     target_2021 VARCHAR(100) NOT NULL,
+    satuan_2021 VARCHAR(100) NOT NULL,
+    opd_2021 VARCHAR(100) NOT NULL,
+    kegiatan_2022 VARCHAR(100) NOT NULL,
     target_2022 VARCHAR(100) NOT NULL,
+    satuan_2022 VARCHAR(100) NOT NULL,
+    opd_2022 VARCHAR(100) NOT NULL,
+    kegiatan_2023 VARCHAR(100) NOT NULL,
     target_2023 VARCHAR(100) NOT NULL,
+    satuan_2023 VARCHAR(100) NOT NULL,
+    opd_2023 VARCHAR(100) NOT NULL,
+    kegiatan_2024 VARCHAR(100) NOT NULL,
     target_2024 VARCHAR(100) NOT NULL,
+    satuan_2024 VARCHAR(100) NOT NULL,
+    opd_2024 VARCHAR(100) NOT NULL,
+    kegiatan_2025 VARCHAR(100) NOT NULL,
     target_2025 VARCHAR(100) NOT NULL,
+    satuan_2025 VARCHAR(100) NOT NULL,
+    opd_2025 VARCHAR(100) NOT NULL,
+    kegiatan_2026 VARCHAR(100) NOT NULL,
     target_2026 VARCHAR(100) NOT NULL,
-    opd_penanggung_jawab VARCHAR(100) NOT NULL
+    satuan_2026 VARCHAR(100) NOT NULL,
+    opd_2026 VARCHAR(100) NOT NULL
 );
 
 CREATE TABLE capaian (
     id INT AUTO_INCREMENT PRIMARY KEY,
     tahun VARCHAR(100) NOT NULL,
+    bulan VARCHAR(100) NOT NULL,
     prioritas VARCHAR(100) NOT NULL,
     program_prioritas VARCHAR(100) NOT NULL,
     kegiatan VARCHAR(100) NOT NULL,
-    target_2021 VARCHAR(100) NOT NULL,
+    target VARCHAR(100) NOT NULL,
     capaian_tahun_sebelumnya VARCHAR(100) NOT NULL,
     realisasi VARCHAR(100) NOT NULL,
-    alasan VARCHAR(100) NOT NULL
+    keterangan TEXT NOT NULL
 );
 

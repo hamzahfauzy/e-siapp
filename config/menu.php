@@ -5,10 +5,10 @@ return [
     'referensi'  => [
         'Organisasi Perangkat Daerah (OPD)' => 'crud/index&table=opd',
         'Prioritas Pembangunan 2021/2026' => 'crud/index&table=prioritas',
-        'Program Prioritas' => 'crud/index&table=kegiatan'
+        'Kegiatan Prioritas' => 'crud/index&table=kegiatan'
     ],
     'evaluasi'  => [
-        'Capaian' => 'crud/index&table=capaian',
+        'Capaian' => 'reports/index',
         'Laporan Capaian' => 'reports/capaian',
         'Grafik Capaian' => 'reports/grafik'
     ],
