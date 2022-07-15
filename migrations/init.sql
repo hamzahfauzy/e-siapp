@@ -86,6 +86,7 @@ CREATE TABLE kegiatan (
 
 CREATE TABLE capaian (
     id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT DEFAULT NULL,
     tahun VARCHAR(100) NOT NULL,
     bulan VARCHAR(100) NOT NULL,
     prioritas VARCHAR(100) NOT NULL,

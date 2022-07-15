@@ -10,6 +10,8 @@ if(request() == 'POST')
     $conn = conn();
     $db   = new Database($conn);
 
+    $_POST[$table]['user_id'] = auth()->user->id;
+
     $insert = $db->insert($table,$_POST[$table]);
 
     set_flash_msg(['success'=>$table.' berhasil ditambahkan']);
