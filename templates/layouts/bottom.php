@@ -56,6 +56,9 @@
 	<script src="<?=asset('assets/js/atlantis.min.js')?>"></script>
 
 	<!-- Atlantis DEMO methods, don't include it in your project! -->
+	<script src="<?=asset('js/util.js')?>"></script>
+	<script src="<?=asset('js/capaian.js')?>"></script>
+
 	<script src="<?=asset('assets/js/setting-demo.js')?>"></script>
 	<script src="<?=asset('assets/js/demo.js')?>"></script>
 	<script>

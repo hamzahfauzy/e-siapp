@@ -1,6 +1,6 @@
 <?php
 
-$table = $_GET['table'];
+$table = 'capaian';
 Page::set_title('Edit '.ucwords($table));
 $conn = conn();
 $db   = new Database($conn);

@@ -96,7 +96,7 @@ return [
         ],
         'program_prioritas' => [
             'label' => 'Kegiatan Prioritas',
-            'type'  => 'options-obj:kegiatan,kd_kegiatan,program_prioritas'
+            'type'  => 'options:- Pilih -'
         ],
         'kegiatan' => [
             'label' => 'Kegiatan',
