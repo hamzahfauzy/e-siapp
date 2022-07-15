@@ -18,6 +18,29 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
+                            <form action="" method="get">
+                                <input type="hidden" name="r" value="reports/index">
+                                <div class="d-flex">
+                                    <div style="width:49%;margin-right:2%">
+                                        <label for="">Tahun</label>
+                                        <?= Form::input('options:2021|2022|2023|2024|2025|2026', 'filter[tahun]', ['class'=>"form-control","value"=>isset($_GET['filter']['tahun'])?$_GET['filter']['tahun']:'']) ?>
+                                    </div>
+                                    <div style="width:49%">
+                                        <label for="">Program Prioritas</label>
+                                        <?= Form::input('options-obj:prioritas,kd_prioritas,nm_prioritas', 'filter[prioritas]', ['class'=>"form-control","value"=>isset($_GET['filter']['prioritas'])?$_GET['filter']['prioritas']:'']) ?>
+                                    </div>
+                                </div>
+                                <p></p>
+                                <button class="btn btn-primary">Filter</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row row-card-no-pd">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
                             <?php if($success_msg): ?>
                             <div class="alert alert-success"><?=$success_msg?></div>
                             <?php endif ?>
