@@ -9,8 +9,7 @@ return [
     ],
     'evaluasi'  => [
         'Capaian' => 'reports/index',
-        'Laporan Capaian' => 'reports/capaian',
-        'Grafik Capaian' => 'reports/grafik'
+        'Laporan Capaian' => 'reports/capaian'
     ],
     'pengguna'  => [
         'semua pengguna' => 'users/index',

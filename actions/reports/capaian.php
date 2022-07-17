@@ -1,0 +1,73 @@
+<?php
+
+Page::set_title("Laporan Capaian");
+$conn = conn();
+$db   = new Database($conn);
+
+$groups = [];
+
+if(isset($_GET['filter']['tahun']))
+{
+    if($_GET['filter']['tahun'] == 'Semua')
+    {
+        $db->query = "SELECT 
+                        tahun, prioritas, program_prioritas, kegiatan,
+                        (SELECT total_target FROM kegiatan WHERE kegiatan.kd_prioritas = capaian.prioritas AND kegiatan.program_prioritas = capaian.program_prioritas) as JLH,
+                        (SELECT SUM(target) FROM capaian c2 WHERE c2.tahun = capaian.tahun AND c2.prioritas = capaian.prioritas AND c2.program_prioritas = capaian.program_prioritas AND c2.kegiatan = capaian.kegiatan) as total_target,
+                        (SELECT SUM(realisasi) FROM capaian c3 WHERE c3.tahun = capaian.tahun AND c3.prioritas = capaian.prioritas AND c3.program_prioritas = capaian.program_prioritas AND c3.kegiatan = capaian.kegiatan) as total_realisasi
+                      FROM 
+                        `capaian` 
+                      group by tahun, prioritas, program_prioritas, kegiatan";
+
+    }
+    else
+    {
+        if($_GET['filter']['bulan'] == 'Semua')
+        {
+            $db->query = "SELECT 
+                        tahun, prioritas, program_prioritas, kegiatan,
+                        (SELECT total_target FROM kegiatan WHERE kegiatan.kd_prioritas = capaian.prioritas AND kegiatan.program_prioritas = capaian.program_prioritas) as JLH,
+                        (SELECT SUM(target) FROM capaian c2 WHERE c2.tahun = capaian.tahun AND c2.prioritas = capaian.prioritas AND c2.program_prioritas = capaian.program_prioritas AND c2.kegiatan = capaian.kegiatan) as total_target,
+                        (SELECT SUM(realisasi) FROM capaian c3 WHERE c3.tahun = capaian.tahun AND c3.prioritas = capaian.prioritas AND c3.program_prioritas = capaian.program_prioritas AND c3.kegiatan = capaian.kegiatan) as total_realisasi
+                      FROM 
+                        `capaian` 
+                      WHERE tahun = ".$_GET['filter']['tahun']." group by tahun, prioritas, program_prioritas, kegiatan";
+        }
+        else
+        {
+            $db->query = "SELECT 
+                        tahun, prioritas, program_prioritas, kegiatan,
+                        (SELECT total_target FROM kegiatan WHERE kegiatan.kd_prioritas = capaian.prioritas AND kegiatan.program_prioritas = capaian.program_prioritas) as JLH,
+                        (SELECT SUM(target) FROM capaian c2 WHERE c2.tahun = capaian.tahun AND c2.prioritas = capaian.prioritas AND c2.program_prioritas = capaian.program_prioritas AND c2.kegiatan = capaian.kegiatan) as total_target,
+                        (SELECT SUM(realisasi) FROM capaian c3 WHERE c3.tahun = capaian.tahun AND c3.prioritas = capaian.prioritas AND c3.program_prioritas = capaian.program_prioritas AND c3.kegiatan = capaian.kegiatan) as total_realisasi
+                      FROM 
+                        `capaian` 
+                      WHERE tahun = ".$_GET['filter']['tahun']." AND bulan = '".$_GET['filter']['bulan']."' group by tahun, prioritas, program_prioritas, kegiatan";
+        }
+        
+
+    }
+    $groups = $db->exec('all');
+
+    $groups = array_map(function($group) use ($db){
+        if($_GET['filter']['tahun'] == 'Semua')
+        {
+            foreach(['2021','2022','2023','2024','2025','2026'] as $thn)
+            {
+                $db->query = "SELECT SUM(target) as total_target FROM capaian WHERE prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas' AND kegiatan = '$group->kegiatan' AND tahun = $thn";
+                $group->target_{$thn} = $db->exec('single')->total_target;
+                
+                $db->query = "SELECT SUM(realisasi) as total_realisasi FROM capaian WHERE prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas' AND kegiatan = '$group->kegiatan' AND tahun = $thn";
+                $group->angka_{$thn} = $db->exec('single')->total_realisasi;
+
+                $group->persen_{$thn} = $group->angka_{$thn} == 0 ? 0 : ($group->angka_{$thn}/$group->target_{$thn}) * 100;
+            }
+        }
+        $group->persen = ($group->total_realisasi/$group->total_target)*100;
+        $group->ket = $group->persen < 100 ? "Belum Tercapai" : "Tercapai";
+        return $group;
+
+    }, $groups);
+}
+
+return compact('groups');
