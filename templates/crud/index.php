@@ -8,6 +8,9 @@
                         <h5 class="text-white op-7 mb-2">Memanajemen data <?=_ucwords($table)?></h5>
                     </div>
                     <div class="ml-md-auto py-2 py-md-0">
+                        <?php if($table == 'kegiatan'): ?>
+                        <a href="<?=routeTo('kegiatan/cetak')?>" target="_blank" class="btn btn-primary btn-round">Cetak</a>
+                        <?php endif ?>
                         <a href="<?=routeTo('crud/create',['table'=>$table])?>" class="btn btn-secondary btn-round">Buat <?=_ucwords($table)?></a>
                     </div>
                 </div>

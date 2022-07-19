@@ -103,7 +103,14 @@ class Form
                     $data = $db->single($options,[
                         $obj_array[1] => $index
                     ]);
-                    return $data->{$obj_array[2]};
+                    if($data)
+                    {
+                        return $data->{$obj_array[2]};
+                    }
+                    else
+                    {
+                        return  '';
+                    }
                 }
 
             }

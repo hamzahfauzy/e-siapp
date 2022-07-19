@@ -30,7 +30,7 @@ return [
             'type'  => 'text'
         ],
         'kd_prioritas' => [
-            'label' => 'Kode Prioritas',
+            'label' => 'Program Prioritas',
             'type'  => 'options-obj:prioritas,kd_prioritas,nm_prioritas'
         ],
         'program_prioritas' => [

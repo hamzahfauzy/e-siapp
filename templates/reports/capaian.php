@@ -84,18 +84,18 @@
                                         <td><?=$group->prioritas?></td>
                                         <td><?=$group->program_prioritas?></td>
                                         <td><?=$group->kegiatan?></td>
-                                        <td><?=$group->JLH?></td>
+                                        <td><?=is_numeric($group->JLH) ? number_format($group->JLH) : $group->JLH?></td>
                                         <?php if($_GET['filter']['tahun'] == 'Semua'): ?>
                                         <?php foreach(['2021','2022','2023','2024','2025','2026'] as $thn): ?>
-                                        <td><?=$group->target_{$thn}?></td>
-                                        <td><?=$group->angka_{$thn}?></td>
-                                        <td><?=$group->persen_{$thn}?></td>
+                                        <td><?=number_format($group->target_{$thn})?></td>
+                                        <td><?=number_format($group->angka_{$thn}).' '.$group->satuan_{$thn}?></td>
+                                        <td><?=number_format($group->persen_{$thn})?></td>
                                         <?php endforeach ?>
                                         <?php else: ?>
                                         <td><?=$group->total_target?></td>
                                         <td><?=$group->total_realisasi?></td>
                                         <?php endif ?>
-                                        <td><?=$group->persen?></td>
+                                        <td><?=number_format($group->persen)?></td>
                                         <td><?=$group->ket?></td>
                                     </tr>
                                     <?php endforeach ?>
