@@ -78,10 +78,17 @@
                                         <?php endfor ?>
                                     </tr>
                                     <?php endif ?>
-                                    <?php foreach($groups as $no => $group): ?>
+                                    <?php 
+                                    foreach($groups as $no => $group): 
+                                        $cnt = count(array_filter($groups,function($g) use ($group) {
+                                            return $g->prioritas==$group->prioritas;
+                                        }));
+                                    ?>
                                     <tr>
                                         <td><?=$no+1;?></td>
-                                        <td><?=$group->prioritas?></td>
+                                        <?php if(!($no != 0 && $group->prioritas == $groups[$no-1]->prioritas)): ?>
+                                        <td rowspan="<?=$cnt?>"><?= $group->prioritas?></td>
+                                        <?php endif ?>
                                         <td><?=$group->program_prioritas?></td>
                                         <td><?=$group->kegiatan?></td>
                                         <td><?=is_numeric($group->JLH) ? number_format($group->JLH) : $group->JLH?></td>
