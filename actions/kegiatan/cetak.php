@@ -17,6 +17,10 @@ $fields = [
         'label' => 'Kegiatan Prioritas',
         'type'  => 'text'
     ],
+    'kegiatan_2021' => [
+        'label' => 'Kegiatan',
+        'type'  => 'text'
+    ],
     'total_target',
     'target_2021' => [
         'label' => '2021',
