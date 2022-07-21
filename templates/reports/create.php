@@ -34,11 +34,16 @@
                                         if(isset($field_data['type']))
                                         $type  = $field_data['type'];
                                     }
+                                    $attr = ['class'=>"form-control","placeholder"=>$label,"value"=>$old[$field]??''];
+                                    if($field == 'target')
+                                    {
+                                        $attr['readonly'] = 'readonly';
+                                    }
                                     $label = _ucwords($label);
                                 ?>
                                 <div class="form-group">
                                     <label for=""><?=$label?></label>
-                                    <?= Form::input($type, $table."[".$field."]", ['class'=>"form-control","placeholder"=>$label,"value"=>$old[$field]??'']) ?>
+                                    <?= Form::input($type, $table."[".$field."]", $attr) ?>
                                 </div>
                                 <?php endforeach ?>
                                 <div class="form-group">
