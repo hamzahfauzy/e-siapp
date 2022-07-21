@@ -60,7 +60,7 @@ if(isset($_GET['filter']['tahun']))
                 $db->query = "SELECT SUM(realisasi) as total_realisasi FROM capaian WHERE prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas' AND kegiatan = '$group->kegiatan' AND tahun = $thn";
                 $group->angka_{$thn} = $db->exec('single')->total_realisasi;
 
-                $group->persen_{$thn} = $group->angka_{$thn} == 0 ? 0 : ($group->angka_{$thn}/$group->target_{$thn}) * 100;
+                $group->persen_{$thn} = $group->angka_{$thn} == 0 ? '' : ($group->angka_{$thn}/$group->target_{$thn}) * 100;
 
                 $db->query = "SELECT * FROM kegiatan WHERE kd_prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas'";
                 $kegiatan = $db->exec('single');
@@ -69,6 +69,7 @@ if(isset($_GET['filter']['tahun']))
 
             }
         }
+        $group->nm_prioritas = $db->single('prioritas',['kd_prioritas'=>$group->prioritas])->nm_prioritas;
         $group->persen = ($group->total_realisasi/$group->total_target)*100;
         $group->ket = $group->persen < 100 ? "Belum Tercapai" : "Tercapai";
         return $group;

@@ -79,24 +79,25 @@
                                     </tr>
                                     <?php endif ?>
                                     <?php 
-                                    foreach($groups as $no => $group): 
+                                    $no=1;
+                                    foreach($groups as $group): 
                                         $cnt = count(array_filter($groups,function($g) use ($group) {
                                             return $g->prioritas==$group->prioritas;
                                         }));
                                     ?>
                                     <tr>
-                                        <td><?=$no+1;?></td>
-                                        <?php if(!($no != 0 && $group->prioritas == $groups[$no-1]->prioritas)): ?>
-                                        <td rowspan="<?=$cnt?>"><?= $group->prioritas?></td>
+                                        <?php if(!($no != 1 && $group->prioritas == $groups[$no-1]->prioritas)): ?>
+                                        <td rowspan="<?=$cnt?>"><?=$no++;?></td>
+                                        <td rowspan="<?=$cnt?>"><?= $group->prioritas.' - '.$group->nm_prioritas?></td>
                                         <?php endif ?>
                                         <td><?=$group->program_prioritas?></td>
                                         <td><?=$group->kegiatan?></td>
                                         <td><?=is_numeric($group->JLH) ? number_format($group->JLH) : $group->JLH?></td>
                                         <?php if($_GET['filter']['tahun'] == 'Semua'): ?>
                                         <?php foreach(['2021','2022','2023','2024','2025','2026'] as $thn): ?>
-                                        <td><?=number_format($group->target_{$thn})?></td>
-                                        <td><?=number_format($group->angka_{$thn}).' '.$group->satuan_{$thn}?></td>
-                                        <td><?=number_format($group->persen_{$thn})?></td>
+                                        <td><?=is_numeric($group->target_{$thn}) ? number_format($group->target_{$thn}) : ''?></td>
+                                        <td><?=is_numeric($group->angka_{$thn}) ? number_format($group->angka_{$thn}).' '.$group->satuan_{$thn} : ''?></td>
+                                        <td><?=is_numeric($group->persen_{$thn}) ? number_format($group->persen_{$thn}) : ''?></td>
                                         <?php endforeach ?>
                                         <?php else: ?>
                                         <td><?=$group->total_target?></td>
