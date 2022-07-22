@@ -36,7 +36,8 @@ foreach($prioritas as $p)
     
 }
 
-$prioritas = array_map(function($p){return $p->nm_prioritas; },$prioritas);
+$all_prioritas = $prioritas;
+$prioritas = array_map(function($p){return $p->kd_prioritas; },$prioritas);
 $prioritas = (array) $prioritas;
 
-return compact('prioritas','data');
+return compact('all_prioritas','prioritas','data');

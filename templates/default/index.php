@@ -24,6 +24,23 @@
                                 <canvas id="statisticsChart"></canvas>
                             </div>
                             <div id="myChartLegend"></div>
+
+                            <div>
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <th>Kode</th>
+                                        <th>Nama</th>
+                                        <th>Presentase</th>
+                                    </tr>
+                                    <?php foreach($all_prioritas as $idx => $p): ?>
+                                    <tr>
+                                        <td><?=$p->kd_prioritas?></td>
+                                        <td><?=$p->nm_prioritas?></td>
+                                        <td><?=$data[$idx]?>%</td>
+                                    </tr>
+                                    <?php endforeach ?>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

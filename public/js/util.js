@@ -12,7 +12,7 @@ function statisticsChart(labels, data)
 	var ctx = document.getElementById('statisticsChart').getContext('2d');
 	
 	var statisticsChart = new Chart(ctx, {
-		type: 'line',
+		type: 'bar',
 		data: {
 			labels: labels,
 			datasets: [ {
@@ -94,4 +94,46 @@ function statisticsChart(labels, data)
 	for (var i = 0; i < legendItems.length; i += 1) {
 		legendItems[i].addEventListener("click", legendClickCallback, false);
 	}
+}
+
+function totalChart(el, labels)
+{
+	var totalIncomeChart = document.querySelector(el).getContext('2d');
+
+	new Chart(totalIncomeChart, {
+		type: 'bar',
+		data: {
+			labels: labels,
+			datasets : [{
+				label: "Program Prioritas",
+				backgroundColor: '#ff9e27',
+				borderColor: 'rgb(23, 125, 255)',
+				data: data,
+			}],
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+			legend: {
+				display: false,
+			},
+			scales: {
+				yAxes: [{
+					ticks: {
+						display: false //this will remove only the label
+					},
+					gridLines : {
+						drawBorder: false,
+						display : false
+					}
+				}],
+				xAxes : [ {
+					gridLines : {
+						drawBorder: false,
+						display : false
+					}
+				}]
+			},
+		}
+	});
 }

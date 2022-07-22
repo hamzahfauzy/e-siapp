@@ -12,7 +12,7 @@ if(isset($_GET['filter']['tahun']))
     {
         $db->query = "SELECT 
                         prioritas, program_prioritas, kegiatan,
-                        (SELECT total_target FROM kegiatan WHERE kegiatan.kd_prioritas = capaian.prioritas AND kegiatan.program_prioritas = capaian.program_prioritas) as JLH,
+                        (SELECT total_target FROM kegiatan WHERE kegiatan.kd_prioritas = capaian.prioritas AND kegiatan.program_prioritas = capaian.program_prioritas AND kegiatan.kegiatan_2021 = capaian.kegiatan) as JLH,
                         (SELECT SUM(target) FROM capaian c2 WHERE c2.tahun = capaian.tahun AND c2.prioritas = capaian.prioritas AND c2.program_prioritas = capaian.program_prioritas AND c2.kegiatan = capaian.kegiatan) as total_target,
                         (SELECT SUM(realisasi) FROM capaian c3 WHERE c3.tahun = capaian.tahun AND c3.prioritas = capaian.prioritas AND c3.program_prioritas = capaian.program_prioritas AND c3.kegiatan = capaian.kegiatan) as total_realisasi
                       FROM 
@@ -26,7 +26,7 @@ if(isset($_GET['filter']['tahun']))
         {
             $db->query = "SELECT 
                         tahun, prioritas, program_prioritas, kegiatan,
-                        (SELECT total_target FROM kegiatan WHERE kegiatan.kd_prioritas = capaian.prioritas AND kegiatan.program_prioritas = capaian.program_prioritas) as JLH,
+                        (SELECT total_target FROM kegiatan WHERE kegiatan.kd_prioritas = capaian.prioritas AND kegiatan.program_prioritas = capaian.program_prioritas AND kegiatan.kegiatan_2021 = capaian.kegiatan) as JLH,
                         (SELECT SUM(target) FROM capaian c2 WHERE c2.tahun = capaian.tahun AND c2.prioritas = capaian.prioritas AND c2.program_prioritas = capaian.program_prioritas AND c2.kegiatan = capaian.kegiatan) as total_target,
                         (SELECT SUM(realisasi) FROM capaian c3 WHERE c3.tahun = capaian.tahun AND c3.prioritas = capaian.prioritas AND c3.program_prioritas = capaian.program_prioritas AND c3.kegiatan = capaian.kegiatan) as total_realisasi
                       FROM 

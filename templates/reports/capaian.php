@@ -80,13 +80,14 @@
                                     <?php endif ?>
                                     <?php 
                                     $no=1;
-                                    foreach($groups as $group): 
+                                    foreach($groups as $index => $group): 
                                         $cnt = count(array_filter($groups,function($g) use ($group) {
                                             return $g->prioritas==$group->prioritas;
                                         }));
+                                        // $cnt = 1;
                                     ?>
                                     <tr>
-                                        <?php if(!($no != 1 && $group->prioritas == $groups[$no-1]->prioritas)): ?>
+                                        <?php if(!($index != 0 && $group->prioritas == $groups[$index-1]->prioritas)): ?>
                                         <td rowspan="<?=$cnt?>"><?=$no++;?></td>
                                         <td rowspan="<?=$cnt?>"><?= $group->prioritas.' - '.$group->nm_prioritas?></td>
                                         <?php endif ?>
