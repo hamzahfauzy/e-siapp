@@ -9,12 +9,12 @@ $success_msg = get_flash_msg('success');
 $data = $db->all($table);
 $data = array_map(function($d) use ($db){
     $opds = [];
-    $i = 1;
-    while($i)
+    $no = 1;
+    for($i=1;$i<=6;$i++)
     {
         if(!$d->{"opd_202".$i}) continue;
         $opds[] = ['no'=>$i,'opd'=>$d->{"opd_202".$i},'tahun'=>(2020+$i)];
-        $i++;
+        $no++;
     }
 
     if(count(array_unique($opds)) > 1)
@@ -33,12 +33,12 @@ $data = array_map(function($d) use ($db){
     }
 
     $kegiatans = [];
-    $i = 1;
-    while($i)
+    $no = 1;
+    for($i=1;$i<=6;$i++)
     {
         if(!$d->{"kegiatan_202".$i}) continue;
         $kegiatans[] = ['no'=>$i,'kegiatan'=>$d->{"kegiatan_202".$i},'tahun'=>(2020+$i)];
-        $i++;
+        $no++;
     }
     
     if(count(array_unique($kegiatans)) > 1)
