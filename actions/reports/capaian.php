@@ -52,22 +52,23 @@ if(isset($_GET['filter']['tahun']))
     $groups = array_map(function($group) use ($db){
         if($_GET['filter']['tahun'] == 'Semua')
         {
-            foreach(['2021','2022','2023','2024','2025','2026'] as $thn)
-            {
-                $db->query = "SELECT SUM(target) as total_target FROM capaian WHERE prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas' AND kegiatan = '$group->kegiatan' AND tahun = $thn";
-                $group->target_{$thn} = $db->exec('single')->total_target;
-                
-                $db->query = "SELECT SUM(realisasi) as total_realisasi FROM capaian WHERE prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas' AND kegiatan = '$group->kegiatan' AND tahun = $thn";
-                $group->angka_{$thn} = $db->exec('single')->total_realisasi;
+          
+          $db->query = "SELECT * FROM kegiatan WHERE kd_prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas'";
+          $kegiatan = $db->exec('single');
+          
+          foreach(['2021','2022','2023','2024','2025','2026'] as $thn)
+          {
 
-                $group->persen_{$thn} = $group->angka_{$thn} == 0 ? '' : ($group->angka_{$thn}/$group->target_{$thn}) * 100;
+            $group->target_{$thn} = $kegiatan->{"target_$thn"} ?? 0;
+            
+            $db->query = "SELECT SUM(realisasi) as total_realisasi FROM capaian WHERE prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas' AND kegiatan = '$group->kegiatan' AND tahun = $thn";
+            $group->angka_{$thn} = $db->exec('single')->total_realisasi;
 
-                $db->query = "SELECT * FROM kegiatan WHERE kd_prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas'";
-                $kegiatan = $db->exec('single');
+            $group->persen_{$thn} = $group->angka_{$thn} == 0 || $group->target_{$thn} == 0 ? '' : ($group->angka_{$thn}/$group->target_{$thn}) * 100;
 
-                $group->satuan_{$thn} = $kegiatan->{"satuan_".$thn};
+            $group->satuan_{$thn} = $kegiatan->{"satuan_".$thn};
 
-            }
+          }
         }
         $group->nm_prioritas = $db->single('prioritas',['kd_prioritas'=>$group->prioritas])->nm_prioritas;
         $group->persen = ($group->total_realisasi/$group->total_target)*100;

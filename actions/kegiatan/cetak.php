@@ -73,27 +73,27 @@ $fields = [
     'total_target',
     'target_2021' => [
         'label' => '2021',
-        'type'  => 'text'
+        'type'  => 'number'
     ],
     'target_2022' => [
         'label' => '2022',
-        'type'  => 'text'
+        'type'  => 'number'
     ],
     'target_2023' => [
         'label' => '2023',
-        'type'  => 'text'
+        'type'  => 'number'
     ],
     'target_2024' => [
         'label' => '2024',
-        'type'  => 'text'
+        'type'  => 'number'
     ],
     'target_2025' => [
         'label' => '2025',
-        'type'  => 'text'
+        'type'  => 'number'
     ],
     'target_2026' => [
         'label' => '2026',
-        'type'  => 'text'
+        'type'  => 'number'
     ],
     'opd'  => [
         'label' => 'OPD Penanggung Jawab',

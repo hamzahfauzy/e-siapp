@@ -1,4 +1,4 @@
-<h2 align="center">Data Kegiatan</h2>
+<h2 align="center">TARGET CAPAIAN PROGRAM PRIORITAS TAHUN 2021 S/D 2026</h2>
 <table width="100%" border="1" cellpadding="5" cellspacing="0">
     <thead>
         <tr>
@@ -29,11 +29,22 @@
                 {
                     $label = $field['label'];
                     $data_value = Form::getData($field['type'],$data->{$key});
+                    if($field['type'] == 'number')
+                    {
+                        $data_value = is_numeric($data_value) ? number_format($data_value) : '';
+                    }
                     $field = $key;
                 }
                 else
                 {
-                    $data_value = $data->{$field};
+                    if($field == 'total_target')
+                    {
+                        $data_value = preg_replace_callback( "/[0-9]+/", function ($matches) {
+                            return number_format($matches[0]);
+                        }, $data->{$field});
+                    }
+                    else
+                        $data_value = $data->{$field};
                 }
                 $label = _ucwords($label);
             ?>
