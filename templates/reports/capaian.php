@@ -84,6 +84,10 @@
                                         $cnt = count(array_filter($groups,function($g) use ($group) {
                                             return $g->prioritas==$group->prioritas;
                                         }));
+
+                                        $group->JLH = preg_replace_callback( "/[0-9]+/", function ($matches) {
+                                            return number_format($matches[0]);
+                                        }, $group->JLH);
                                         // $cnt = 1;
                                     ?>
                                     <tr>
@@ -93,7 +97,7 @@
                                         <?php endif ?>
                                         <td><?=$group->program_prioritas?></td>
                                         <td><?=$group->kegiatan?></td>
-                                        <td><?=is_numeric($group->JLH) ? number_format($group->JLH) : $group->JLH?></td>
+                                        <td><?=$group->JLH?></td>
                                         <?php if($_GET['filter']['tahun'] == 'Semua'): ?>
                                         <?php foreach(['2021','2022','2023','2024','2025','2026'] as $thn): ?>
                                         <td><?=is_numeric($group->target_{$thn}) ? number_format($group->target_{$thn}) : ''?></td>
