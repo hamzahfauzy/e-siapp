@@ -9,12 +9,13 @@ $success_msg = get_flash_msg('success');
 $data = $db->all($table);
 $data = array_map(function($d) use ($db){
     $opds = [];
-    $opds[] = ['no'=>1,'opd'=>$d->opd_2021,'tahun'=>2021];
-    $opds[] = ['no'=>2,'opd'=>$d->opd_2022,'tahun'=>2022];
-    $opds[] = ['no'=>3,'opd'=>$d->opd_2023,'tahun'=>2023];
-    $opds[] = ['no'=>4,'opd'=>$d->opd_2024,'tahun'=>2024];
-    $opds[] = ['no'=>5,'opd'=>$d->opd_2025,'tahun'=>2025];
-    $opds[] = ['no'=>6,'opd'=>$d->opd_2026,'tahun'=>2026];
+    $i = 1;
+    while($i)
+    {
+        if(!$d->{"opd_202".$i}) continue;
+        $opds[] = ['no'=>$i,'opd'=>$d->{"opd_202".$i},'tahun'=>(2020+$i)];
+        $i++;
+    }
 
     if(count(array_unique($opds)) > 1)
     {
@@ -32,13 +33,14 @@ $data = array_map(function($d) use ($db){
     }
 
     $kegiatans = [];
-    $kegiatans[] = ['no'=>1,'kegiatan'=>$d->kegiatan_2021,'tahun'=>2021];
-    $kegiatans[] = ['no'=>2,'kegiatan'=>$d->kegiatan_2022,'tahun'=>2022];
-    $kegiatans[] = ['no'=>3,'kegiatan'=>$d->kegiatan_2023,'tahun'=>2023];
-    $kegiatans[] = ['no'=>4,'kegiatan'=>$d->kegiatan_2024,'tahun'=>2024];
-    $kegiatans[] = ['no'=>5,'kegiatan'=>$d->kegiatan_2025,'tahun'=>2025];
-    $kegiatans[] = ['no'=>6,'kegiatan'=>$d->kegiatan_2026,'tahun'=>2026];
-
+    $i = 1;
+    while($i)
+    {
+        if(!$d->{"kegiatan_202".$i}) continue;
+        $kegiatans[] = ['no'=>$i,'kegiatan'=>$d->{"kegiatan_202".$i},'tahun'=>(2020+$i)];
+        $i++;
+    }
+    
     if(count(array_unique($kegiatans)) > 1)
     {
         $kegiatans = array_map(function($opd, $index) use ($db){
