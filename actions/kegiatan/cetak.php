@@ -27,7 +27,8 @@ $data = array_map(function($d) use ($db){
     }
     else
     {
-        $d->opd = $opds[0]['opd'];
+        $nm_opd = $db->single('opd',['kd_opd'=>$opds[0]['opd']])->nm_opd;
+        $d->opd = $nm_opd;
     }
 
     $kegiatans = [];
