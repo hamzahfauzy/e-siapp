@@ -27,7 +27,7 @@ $data = array_map(function($d) use ($db){
     }
     else
     {
-        $d->opd = $opds[0];
+        $d->opd = $opds[0]['opd'];
     }
 
     $kegiatans = [];
@@ -48,7 +48,7 @@ $data = array_map(function($d) use ($db){
     }
     else
     {
-        $d->kegiatan = $kegiatans[0];
+        $d->kegiatan = $kegiatans[0]['kegiatan'];
     }
 
     return $d;
