@@ -1,4 +1,5 @@
 config/main.php
+public/error.log
 
 #for development purpose
 reset.php 
