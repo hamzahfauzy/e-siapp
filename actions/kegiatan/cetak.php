@@ -17,7 +17,7 @@ $data = array_map(function($d) use ($db){
         $no++;
     }
 
-    if(count(array_unique($opds)) > 1)
+    if(count(array_unique(array_column($opds,'opd'))) > 1)
     {
         $opds = array_map(function($opd, $index) use ($db){
             $nm_opd = $db->single('opd',['kd_opd'=>$opd['opd']])->nm_opd;
@@ -41,7 +41,7 @@ $data = array_map(function($d) use ($db){
         $no++;
     }
     
-    if(count(array_unique($kegiatans)) > 1)
+    if(count(array_unique(array_column($kegiatans,'kegiatan'))) > 1)
     {
         $kegiatans = array_map(function($opd, $index) use ($db){
             return $opd['no'].'. '.$opd['kegiatan'].' ('.$opd['tahun'].')';
