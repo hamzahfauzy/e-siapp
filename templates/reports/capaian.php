@@ -84,6 +84,10 @@
                                         $cnt = count(array_filter($groups,function($g) use ($group) {
                                             return $g->prioritas==$group->prioritas;
                                         }));
+                                        
+                                        $cnt2 = count(array_filter($groups,function($g) use ($group) {
+                                            return $g->program_prioritas==$group->program_prioritas;
+                                        }));
 
                                         $group->JLH = preg_replace_callback( "/[0-9]+/", function ($matches) {
                                             return number_format($matches[0]);
@@ -96,8 +100,8 @@
                                         <td rowspan="<?=$cnt?>"><?= $group->prioritas.' - '.$group->nm_prioritas?></td>
                                         <?php endif ?>
                                         <td><?=$group->program_prioritas?></td>
-                                        <?php if(!($index != 0 && $group->prioritas == $groups[$index-1]->prioritas)): ?>
-                                        <td rowspan="<?=$cnt?>"><?=$group->JLH?></td>
+                                        <?php if(!($index != 0 && $group->program_prioritas == $groups[$index-1]->program_prioritas)): ?>
+                                        <td rowspan="<?=$cnt2?>"><?=$group->JLH?></td>
                                         <?php endif ?>
                                         <td><?=$group->kegiatan?></td>
                                         <?php if($_GET['filter']['tahun'] == 'Semua'): ?>
