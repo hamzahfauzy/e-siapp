@@ -1,4 +1,8 @@
 <?php
+ini_set("log_errors", 1);
+ini_set("error_log", "error.log");
+error_log( "Hello, errors!" );
+
 session_start();
 date_default_timezone_set('Asia/Jakarta');
 if(file_exists('../vendor/autoload.php'))
