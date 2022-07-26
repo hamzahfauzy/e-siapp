@@ -30,6 +30,27 @@ $data = array_map(function($d) use ($db){
         $d->opd = $opds[0];
     }
 
+    $kegiatans = [];
+    $kegiatans[] = ['no'=>1,'kegiatan'=>$d->kegiatan_2021,'tahun'=>2021];
+    $kegiatans[] = ['no'=>2,'kegiatan'=>$d->kegiatan_2022,'tahun'=>2022];
+    $kegiatans[] = ['no'=>3,'kegiatan'=>$d->kegiatan_2023,'tahun'=>2023];
+    $kegiatans[] = ['no'=>4,'kegiatan'=>$d->kegiatan_2024,'tahun'=>2024];
+    $kegiatans[] = ['no'=>5,'kegiatan'=>$d->kegiatan_2025,'tahun'=>2025];
+    $kegiatans[] = ['no'=>6,'kegiatan'=>$d->kegiatan_2026,'tahun'=>2026];
+
+    if(count(array_unique($kegiatans)) > 1)
+    {
+        $kegiatans = array_map(function($opd, $index) use ($db){
+            return $opd['no'].'. '.$opd['kegiatan'].' ('.$opd['tahun'].')';
+        }, $kegiatans);
+
+        $d->kegiatan = implode('<br>',$kegiatans);
+    }
+    else
+    {
+        $d->kegiatan = $kegiatans[0];
+    }
+
     return $d;
 }, $data);
 
@@ -42,7 +63,7 @@ $fields = [
         'label' => 'Kegiatan Prioritas',
         'type'  => 'text'
     ],
-    'kegiatan_2021' => [
+    'kegiatan' => [
         'label' => 'Kegiatan',
         'type'  => 'text'
     ],
