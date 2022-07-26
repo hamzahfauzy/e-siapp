@@ -26,7 +26,6 @@ if(isset($_GET['filter']['tahun']))
         {
             $db->query = "SELECT 
                         tahun, prioritas, program_prioritas, kegiatan,
-                        (SELECT total_target FROM kegiatan WHERE kegiatan.kd_prioritas = capaian.prioritas AND kegiatan.program_prioritas = capaian.program_prioritas AND kegiatan.kegiatan_2021 = capaian.kegiatan) as JLH,
                         (SELECT SUM(target) FROM capaian c2 WHERE c2.tahun = capaian.tahun AND c2.prioritas = capaian.prioritas AND c2.program_prioritas = capaian.program_prioritas AND c2.kegiatan = capaian.kegiatan) as total_target,
                         (SELECT SUM(realisasi) FROM capaian c3 WHERE c3.tahun = capaian.tahun AND c3.prioritas = capaian.prioritas AND c3.program_prioritas = capaian.program_prioritas AND c3.kegiatan = capaian.kegiatan) as total_realisasi
                       FROM 
@@ -37,7 +36,6 @@ if(isset($_GET['filter']['tahun']))
         {
             $db->query = "SELECT 
                         tahun, prioritas, program_prioritas, kegiatan,
-                        (SELECT total_target FROM kegiatan WHERE kegiatan.kd_prioritas = capaian.prioritas AND kegiatan.program_prioritas = capaian.program_prioritas) as JLH,
                         (SELECT SUM(target) FROM capaian c2 WHERE c2.tahun = capaian.tahun AND c2.prioritas = capaian.prioritas AND c2.program_prioritas = capaian.program_prioritas AND c2.kegiatan = capaian.kegiatan) as total_target,
                         (SELECT SUM(realisasi) FROM capaian c3 WHERE c3.tahun = capaian.tahun AND c3.prioritas = capaian.prioritas AND c3.program_prioritas = capaian.program_prioritas AND c3.kegiatan = capaian.kegiatan) as total_realisasi
                       FROM 
@@ -50,11 +48,12 @@ if(isset($_GET['filter']['tahun']))
     $groups = $db->exec('all');
 
     $groups = array_map(function($group) use ($db){
+        $db->query = "SELECT * FROM kegiatan WHERE kd_prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas'";
+        $kegiatan = $db->exec('single');
+
         if($_GET['filter']['tahun'] == 'Semua')
         {
           
-          $db->query = "SELECT * FROM kegiatan WHERE kd_prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas'";
-          $kegiatan = $db->exec('single');
           
           foreach(['2021','2022','2023','2024','2025','2026'] as $thn)
           {
@@ -70,6 +69,7 @@ if(isset($_GET['filter']['tahun']))
 
           }
         }
+        $group->JLH = $kegiatan->total_target;
         $group->nm_prioritas = $db->single('prioritas',['kd_prioritas'=>$group->prioritas])->nm_prioritas;
         $group->persen = ($group->total_realisasi/$group->total_target)*100;
         $group->ket = $group->persen < 100 ? "Belum Tercapai" : "Tercapai";
