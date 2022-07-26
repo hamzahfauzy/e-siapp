@@ -49,12 +49,15 @@
                             <?php else: ?>
                                 <center>
                                     <h1>Laporan Realisasi Capaian Program Prioritas Pembangunan</h1>
+                                    <?php if($_GET['filter']['tahun'] != 'Semua'): ?>
+                                    <h2>Tahun <?=$_GET['filter']['tahun']?></h2>
+                                    <?php endif ?>
                                 </center>
                                 <table width="100%" border="1" cellspacing="0" cellpadding="5">
                             <?php endif ?>
                                     <tr>
                                         <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">No</td>
-                                        <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Prioritas</td>
+                                        <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Program Prioritas</td>
                                         <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Kegiatan Prioritas</td>
                                         <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Total Target</td>
                                         <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Kegiatan</td>
@@ -67,7 +70,7 @@
                                         <td>Target</td>
                                         <td>Realisasi</td>
                                         <?php endif ?>
-                                        <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">% Capaian</td>
+                                        <!-- <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">% Capaian</td> -->
                                         <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Keterangan</td>
                                     </tr>
                                     <?php if($_GET['filter']['tahun'] == 'Semua'): ?>
@@ -99,8 +102,8 @@
                                         <td rowspan="<?=$cnt?>"><?=$no++;?></td>
                                         <td rowspan="<?=$cnt?>"><?= $group->prioritas.' - '.$group->nm_prioritas?></td>
                                         <?php endif ?>
-                                        <td><?=$group->program_prioritas?></td>
                                         <?php if(!($index != 0 && $group->program_prioritas == $groups[$index-1]->program_prioritas)): ?>
+                                        <td rowspan="<?=$cnt2?>"><?=$group->program_prioritas?></td>
                                         <td rowspan="<?=$cnt2?>"><?=$group->JLH?></td>
                                         <?php endif ?>
                                         <td><?=$group->kegiatan?></td>
@@ -114,7 +117,7 @@
                                         <td><?=$group->total_target?></td>
                                         <td><?=$group->total_realisasi?></td>
                                         <?php endif ?>
-                                        <td><?=number_format($group->persen)?></td>
+                                        <!-- <td><?=number_format($group->persen)?></td> -->
                                         <td><?=$group->ket?></td>
                                     </tr>
                                     <?php endforeach ?>
