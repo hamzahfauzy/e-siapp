@@ -96,7 +96,9 @@
                                         <td rowspan="<?=$cnt?>"><?= $group->prioritas.' - '.$group->nm_prioritas?></td>
                                         <?php endif ?>
                                         <td><?=$group->program_prioritas?></td>
-                                        <td><?=$group->JLH?></td>
+                                        <?php if(!($index != 0 && $group->prioritas == $groups[$index-1]->prioritas)): ?>
+                                        <td rowspan="<?=$cnt?>"><?=$group->JLH?></td>
+                                        <?php endif ?>
                                         <td><?=$group->kegiatan?></td>
                                         <?php if($_GET['filter']['tahun'] == 'Semua'): ?>
                                         <?php foreach(['2021','2022','2023','2024','2025','2026'] as $thn): ?>
