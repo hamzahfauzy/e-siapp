@@ -48,7 +48,7 @@
                                 <table class="table table-bordered">
                             <?php else: ?>
                                 <center>
-                                    <h1>Laporan Realisasi</h1>
+                                    <h1>Laporan Realisasi Capaian Program Prioritas Pembangunan</h1>
                                 </center>
                                 <table width="100%" border="1" cellspacing="0" cellpadding="5">
                             <?php endif ?>
@@ -56,8 +56,8 @@
                                         <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">No</td>
                                         <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Prioritas</td>
                                         <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Kegiatan Prioritas</td>
+                                        <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Total Target</td>
                                         <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Kegiatan</td>
-                                        <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">JLH</td>
                                         <?php if($_GET['filter']['tahun'] == 'Semua'): ?>
                                         <?php foreach(['2021','2022','2023','2024','2025','2026'] as $thn): ?>
                                         <td rowspan="2">Target <?=$thn?></td>
@@ -96,8 +96,8 @@
                                         <td rowspan="<?=$cnt?>"><?= $group->prioritas.' - '.$group->nm_prioritas?></td>
                                         <?php endif ?>
                                         <td><?=$group->program_prioritas?></td>
-                                        <td><?=$group->kegiatan?></td>
                                         <td><?=$group->JLH?></td>
+                                        <td><?=$group->kegiatan?></td>
                                         <?php if($_GET['filter']['tahun'] == 'Semua'): ?>
                                         <?php foreach(['2021','2022','2023','2024','2025','2026'] as $thn): ?>
                                         <td><?=is_numeric($group->target_{$thn}) ? number_format($group->target_{$thn}) : ''?></td>
