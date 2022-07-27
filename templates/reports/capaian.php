@@ -56,22 +56,22 @@
                                 <table width="100%" border="1" cellspacing="0" cellpadding="5">
                             <?php endif ?>
                                     <tr>
-                                        <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">No</td>
-                                        <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Program Prioritas</td>
-                                        <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Kegiatan Prioritas</td>
-                                        <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Total Target</td>
-                                        <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Kegiatan</td>
+                                        <td style="white-space:nowrap" rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">No</td>
+                                        <td style="white-space:nowrap" rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Program Prioritas</td>
+                                        <td style="white-space:nowrap" rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Kegiatan Prioritas</td>
+                                        <td style="white-space:nowrap" rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Total Target</td>
+                                        <td style="white-space:nowrap" rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Kegiatan</td>
                                         <?php if($_GET['filter']['tahun'] == 'Semua'): ?>
                                         <?php foreach(['2021','2022','2023','2024','2025','2026'] as $thn): ?>
-                                        <td rowspan="2">Target <?=$thn?></td>
-                                        <td colspan="2">Realisasi</td>
+                                        <td style="white-space:nowrap" rowspan="2">Target <?=$thn?></td>
+                                        <td style="white-space:nowrap" colspan="2">Realisasi</td>
                                         <?php endforeach ?>
                                         <?php else: ?>
-                                        <td>Target</td>
-                                        <td>Realisasi</td>
+                                        <td style="white-space:nowrap">Target</td>
+                                        <td style="white-space:nowrap">Realisasi</td>
                                         <?php endif ?>
-                                        <!-- <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">% Capaian</td> -->
-                                        <td rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Keterangan</td>
+                                        <!-- <td style="white-space:nowrap" rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">% Capaian</td> -->
+                                        <td style="white-space:nowrap" rowspan="<?=$_GET['filter']['tahun'] == 'Semua' ? 2 : 1 ?>">Keterangan</td>
                                     </tr>
                                     <?php if($_GET['filter']['tahun'] == 'Semua'): ?>
                                     <tr>
@@ -99,26 +99,26 @@
                                     ?>
                                     <tr>
                                         <?php if(!($index != 0 && $group->prioritas == $groups[$index-1]->prioritas)): ?>
-                                        <td rowspan="<?=$cnt?>"><?=$no++;?></td>
-                                        <td rowspan="<?=$cnt?>"><?= $group->prioritas.' - '.$group->nm_prioritas?></td>
+                                        <td style="white-space:nowrap" rowspan="<?=$cnt?>"><?=$no++;?></td>
+                                        <td style="white-space:nowrap" rowspan="<?=$cnt?>"><?= $group->prioritas.' - '.$group->nm_prioritas?></td>
                                         <?php endif ?>
                                         <?php if(!($index != 0 && $group->program_prioritas == $groups[$index-1]->program_prioritas)): ?>
-                                        <td rowspan="<?=$cnt2?>"><?=$group->program_prioritas?></td>
-                                        <td rowspan="<?=$cnt2?>"><?=$group->JLH?></td>
+                                        <td style="white-space:nowrap" rowspan="<?=$cnt2?>"><?=$group->program_prioritas?></td>
+                                        <td style="white-space:nowrap" rowspan="<?=$cnt2?>"><?=$group->JLH?></td>
                                         <?php endif ?>
-                                        <td><?=$group->kegiatan?></td>
+                                        <td style="white-space:nowrap"><?=$group->kegiatan?></td>
                                         <?php if($_GET['filter']['tahun'] == 'Semua'): ?>
                                         <?php foreach(['2021','2022','2023','2024','2025','2026'] as $thn): ?>
-                                        <td><?=is_numeric($group->target_{$thn}) ? number_format($group->target_{$thn}) : ''?></td>
-                                        <td><?=is_numeric($group->angka_{$thn}) ? number_format($group->angka_{$thn}).' '.$group->satuan_{$thn} : ''?></td>
-                                        <td><?=is_numeric($group->persen_{$thn}) ? number_format($group->persen_{$thn}) : ''?></td>
+                                        <td style="white-space:nowrap"><?=is_numeric($group->target_{$thn}) ? number_format($group->target_{$thn}) : ''?></td>
+                                        <td style="white-space:nowrap"><?=is_numeric($group->angka_{$thn}) ? number_format($group->angka_{$thn}).' '.$group->satuan_{$thn} : ''?></td>
+                                        <td style="white-space:nowrap"><?=is_numeric($group->persen_{$thn}) ? number_format($group->persen_{$thn}) : ''?></td>
                                         <?php endforeach ?>
                                         <?php else: ?>
-                                        <td><?=$group->total_target?></td>
-                                        <td><?=$group->total_realisasi?></td>
+                                        <td style="white-space:nowrap"><?=$group->total_target?></td>
+                                        <td style="white-space:nowrap"><?=$group->total_realisasi?></td>
                                         <?php endif ?>
-                                        <!-- <td><?=number_format($group->persen)?></td> -->
-                                        <td><?=$group->ket?></td>
+                                        <!-- <td style="white-space:nowrap"><?=number_format($group->persen)?></td> -->
+                                        <td style="white-space:nowrap"><?=$group->keterangan?></td>
                                     </tr>
                                     <?php endforeach ?>
                                 </table>
