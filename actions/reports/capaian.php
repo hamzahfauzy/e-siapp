@@ -57,7 +57,6 @@ if(isset($_GET['filter']['tahun']))
         if($_GET['filter']['tahun'] == 'Semua')
         {
           $cnt = $db->all('capaian',[
-            'prioritas' => $group->prioritas,
             'program_prioritas' => $group->program_prioritas,
           ]);
           $cnt = count($cnt);
