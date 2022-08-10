@@ -57,17 +57,18 @@ if(isset($_GET['filter']['tahun']))
         if($_GET['filter']['tahun'] == 'Semua')
         {
           $cnt = $db->all('capaian',[
-            'prioritas' => $group->prioritas
+            'prioritas' => $group->prioritas,
+            'program_prioritas' => $group->program_prioritas,
           ]);
           $cnt = count($cnt);
 
           foreach(['2021','2022','2023','2024','2025','2026'] as $thn)
           {
 
+            $db->query = "SELECT * FROM capaian WHERE prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas' AND kegiatan = '$group->kegiatan' AND tahun = $thn";
+            $cp = $db->exec('single');
             if($cnt > 1)
             {
-              $db->query = "SELECT * FROM capaian WHERE prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas' AND kegiatan = '$group->kegiatan' AND tahun = $thn";
-              $cp = $db->exec('single');
   
               $group->target_{$thn} = $cp->target ?? '';
             }
