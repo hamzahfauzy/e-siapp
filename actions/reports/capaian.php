@@ -6,6 +6,8 @@ $db   = new Database($conn);
 
 $groups = [];
 
+$query = "";
+
 if(isset($_GET['filter']['tahun']))
 {
     if($_GET['filter']['tahun'] == 'Semua')
@@ -45,18 +47,19 @@ if(isset($_GET['filter']['tahun']))
         
 
     }
+    $query = $db->query;
     $groups = $db->exec('all');
 
-    $groups = array_map(function($group) use ($db){
+    $groups = array_map(function($group) use ($db, $query){
         $db->query = "SELECT * FROM kegiatan WHERE kd_prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas'";
         $kegiatan = $db->exec('single');
 
         if($_GET['filter']['tahun'] == 'Semua')
         {
-          
-          $cnt = count(array_filter($groups,function($g) use ($group) {
-            return $g->prioritas==$group->prioritas;
-          }));
+          $cnt = $db->all('capaiang',[
+            'prioritas' => $group->prioritas
+          ]);
+          $cnt = count($cnt);
 
           echo $cnt;
 
