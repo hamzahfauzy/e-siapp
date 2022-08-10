@@ -60,7 +60,7 @@ if(isset($_GET['filter']['tahun']))
               return $g->program_prioritas==$group->program_prioritas;
             }));
 
-            echo $cnt;
+            echo $cnt2;
 
             // if($cnt2 > 1)
             // {
