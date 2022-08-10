@@ -54,11 +54,11 @@ if(isset($_GET['filter']['tahun']))
         if($_GET['filter']['tahun'] == 'Semua')
         {
           
-          $cnt2 = count(array_filter($groups,function($g) use ($group) {
-            return $g->program_prioritas==$group->program_prioritas;
+          $cnt = count(array_filter($groups,function($g) use ($group) {
+            return $g->prioritas==$group->prioritas;
           }));
 
-          echo $cnt2;
+          echo $cnt;
 
           foreach(['2021','2022','2023','2024','2025','2026'] as $thn)
           {
