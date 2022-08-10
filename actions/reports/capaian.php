@@ -56,10 +56,8 @@ if(isset($_GET['filter']['tahun']))
 
         if($_GET['filter']['tahun'] == 'Semua')
         {
-          $cnt = $db->all('capaian',[
-            'program_prioritas' => $group->program_prioritas,
-          ]);
-          $cnt = count($cnt);
+          $db->query = "SELECT program_prioritas FROM capaian WHERE program_prioritas = '$group->program_prioritas' GROUP BY kegiatan";
+          $cnt = count($db->exec('all'));
 
           foreach(['2021','2022','2023','2024','2025','2026'] as $thn)
           {
