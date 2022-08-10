@@ -47,7 +47,7 @@ if(isset($_GET['filter']['tahun']))
     }
     $groups = $db->exec('all');
 
-    $groups = array_map(function($group) use ($db){
+    $groups = array_map(function($group) use ($db, $groups){
         $db->query = "SELECT * FROM kegiatan WHERE kd_prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas'";
         $kegiatan = $db->exec('single');
 
