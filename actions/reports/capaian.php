@@ -47,20 +47,21 @@ if(isset($_GET['filter']['tahun']))
     }
     $groups = $db->exec('all');
 
-    $groups = array_map(function($group) use ($db, $groups){
+    $groups = array_map(function($group) use ($db){
         $db->query = "SELECT * FROM kegiatan WHERE kd_prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas'";
         $kegiatan = $db->exec('single');
 
         if($_GET['filter']['tahun'] == 'Semua')
         {
           
+          $cnt2 = count(array_filter($groups,function($g) use ($group) {
+            return $g->program_prioritas==$group->program_prioritas;
+          }));
+
+          echo $cnt2;
+
           foreach(['2021','2022','2023','2024','2025','2026'] as $thn)
           {
-            $cnt2 = count(array_filter($groups,function($g) use ($group) {
-              return $g->program_prioritas==$group->program_prioritas;
-            }));
-
-            echo $cnt2;
 
             // if($cnt2 > 1)
             // {
