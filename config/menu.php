@@ -11,7 +11,7 @@ return [
         'Capaian' => 'reports/index',
         'Laporan Capaian' => 'reports/capaian'
     ],
-    'download manual' => 'buku-manual.pdf',
+    'download manual' => 'download&file=buku-manual.pdf',
     'pengguna'  => [
         'semua pengguna' => 'users/index',
         'roles' => 'roles/index'
