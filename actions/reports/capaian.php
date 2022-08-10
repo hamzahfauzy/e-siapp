@@ -60,6 +60,8 @@ if(isset($_GET['filter']['tahun']))
               return $g->program_prioritas==$group->program_prioritas;
             }));
 
+            echo $cnt;
+
             // if($cnt2 > 1)
             // {
               $db->query = "SELECT * FROM capaian WHERE prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas' AND kegiatan = '$group->kegiatan' AND tahun = $thn";
