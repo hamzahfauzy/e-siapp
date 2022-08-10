@@ -61,20 +61,18 @@ if(isset($_GET['filter']['tahun']))
           ]);
           $cnt = count($cnt);
 
-          echo $cnt;
-
           foreach(['2021','2022','2023','2024','2025','2026'] as $thn)
           {
 
-            // if($cnt2 > 1)
-            // {
+            if($cnt > 1)
+            {
               $db->query = "SELECT * FROM capaian WHERE prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas' AND kegiatan = '$group->kegiatan' AND tahun = $thn";
               $cp = $db->exec('single');
   
               $group->target_{$thn} = $cp->target ?? '';
-            // }
-            // else
-            //   $group->target_{$thn} = $kegiatan->{"target_$thn"} ?? 0;
+            }
+            else
+              $group->target_{$thn} = $kegiatan->{"target_$thn"} ?? 0;
             
             $db->query = "SELECT SUM(realisasi) as total_realisasi FROM capaian WHERE prioritas = '$group->prioritas' AND program_prioritas = '$group->program_prioritas' AND kegiatan = '$group->kegiatan' AND tahun = $thn";
             $group->angka_{$thn} = $db->exec('single')->total_realisasi;
